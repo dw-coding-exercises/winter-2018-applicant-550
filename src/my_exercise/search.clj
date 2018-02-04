@@ -1,6 +1,7 @@
 (ns my-exercise.search
   (:require [hiccup.page :refer [html5]]
-            [my-exercise.home :as home]))
+            [my-exercise.home :as home]
+            [clj-http.client :as client]))
 
 (defn get-params
   "Function to get incoming form params"
