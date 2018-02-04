@@ -71,3 +71,10 @@
   (html5
    (home/header request)
    (search-results request)))
+
+; TODO
+; - Refactor OCD ID functions to clean up repetitive behavior
+; - Handle situation where API Request fails with message to user that request failed
+; - Add back button to homepage to provide simple user experience
+; - Keep list tracking most recent searches
+; - Additional Feature: Provide a link to a page for more election result details
