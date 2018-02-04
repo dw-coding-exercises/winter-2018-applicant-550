@@ -7,6 +7,22 @@
   [{city :city state :state}]
   {:state state :place city})
 
+(def country-ocd-id
+  "ocd-division/country:us")
+
+(defn state-ocd-id
+  "Function to create ocd-id state string"
+  [state]
+  (if (empty? state)
+    nil
+    (str "ocd-division/country:us/state:" state)))
+
+(defn place-ocd-id
+  "Function to create ocd-id place string"
+  [state, place]
+  (if (or (empty? state) (empty? place))
+    nil
+    (str "ocd-division/country:us/state:" state "/place:" place)))
 (defn search-results
   "Function to render search results"
   [request]
