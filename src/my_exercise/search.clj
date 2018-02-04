@@ -2,7 +2,7 @@
   (:require [hiccup.page :refer [html5]]
             [my-exercise.home :as home]))
 
-(defn getParams
+(defn get-params
   "Function to get incoming form params"
   [{city :city state :state}]
   {:state state :place city})
@@ -38,7 +38,7 @@
 (defn search-results
   "Function to render search results"
   [request]
-  (let [search-params (getParams (:params request))]
+  (let [search-params (get-params (:params request))]
     (println (get-ocd-id search-params))
     [:div {:class "search-results"}]
     [:h1 "Search Results"]))
