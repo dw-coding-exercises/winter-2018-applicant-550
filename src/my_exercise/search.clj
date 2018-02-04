@@ -47,6 +47,7 @@
       (clojure.edn/read-string (:body (client/get (str election-api-url ocd-id-string)))))))
 
 (defn show-upcoming-election
+  "Fuction to show list element with upcoming election data"
   [{description :description date :date id :id :as election}]
   [:li
    [:div description]
