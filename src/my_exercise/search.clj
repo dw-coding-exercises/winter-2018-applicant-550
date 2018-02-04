@@ -44,7 +44,14 @@
   [{params :params}]
   (let [search-params (get-params params)]
     (let [ocd-id-string (get-ocd-id search-params)]
-      (client/get (str election-api-url ocd-id-string)))))
+      (clojure.edn/read-string (:body (client/get (str election-api-url ocd-id-string)))))))
+
+(defn show-upcoming-election
+  [{description :description date :date id :id :as election}]
+  [:li
+   [:div description]
+   [:div date]
+   [:div id]])
 
 (defn search-results
   "Function to render search results"
@@ -52,7 +59,8 @@
   (let [results (get-upcoming-elections request)]
     [:div {:class "search-results"}
      [:h1 "Search Results"]
-     [:div (str results)]]))
+     [:ul
+      (map show-upcoming-election results)]]))
 
 (defn page
   "Function to render search page"
