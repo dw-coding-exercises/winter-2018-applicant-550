@@ -36,13 +36,23 @@
   [params]
   (clojure.string/join "," (create-ocd-id-list params)))
 
+(def election-api-url
+  "https://api.turbovote.org/elections/upcoming?district-divisions=")
+
+(defn get-upcoming-elections
+  "Function to take in form params and return result from api call"
+  [{params :params}]
+  (let [search-params (get-params params)]
+    (let [ocd-id-string (get-ocd-id search-params)]
+      (client/get (str election-api-url ocd-id-string)))))
+
 (defn search-results
   "Function to render search results"
   [request]
-  (let [search-params (get-params (:params request))]
-    (println (get-ocd-id search-params))
-    [:div {:class "search-results"}]
-    [:h1 "Search Results"]))
+  (let [results (get-upcoming-elections request)]
+    [:div {:class "search-results"}
+     [:h1 "Search Results"]
+     [:div (str results)]]))
 
 (defn page
   "Function to render search page"
