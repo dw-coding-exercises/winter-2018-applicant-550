@@ -23,11 +23,23 @@
   (if (or (empty? state) (empty? place))
     nil
     (str "ocd-division/country:us/state:" state "/place:" place)))
+
+(defn create-ocd-id-list
+  "Function to create list of ocd-ids and remove nil elements"
+  [{state :state place :place}]
+  (let [string-state (clojure.string/lower-case state) string-place (clojure.string/replace (clojure.string/lower-case place) " " "_")]
+    (clojure.core/remove nil? [country-ocd-id (state-ocd-id string-state) (place-ocd-id string-state string-place)])))
+
+(defn get-ocd-id
+  "Function to create ocd-id string"
+  [params]
+  (clojure.string/join "," (create-ocd-id-list params)))
+
 (defn search-results
   "Function to render search results"
   [request]
   (let [search-params (getParams (:params request))]
-    (println search-params)
+    (println (get-ocd-id search-params))
     [:div {:class "search-results"}]
     [:h1 "Search Results"]))
 
