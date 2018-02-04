@@ -59,8 +59,10 @@
   (let [results (get-upcoming-elections request)]
     [:div {:class "search-results"}
      [:h1 "Search Results"]
-     [:ul
-      (map show-upcoming-election results)]]))
+     (if (empty? results)
+       [:div "No Upcoming Elections"]
+       [:ul
+          (map show-upcoming-election results)])]))
 
 (defn page
   "Function to render search page"
